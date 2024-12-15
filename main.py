@@ -1,10 +1,10 @@
 import numpy as np
 from matplotlib import pyplot as plt
 import cv2
+from scipy.signal import correlate2d
 from grayscaling import to_grayscale
 from nonmaximumsuppression import non_max_suppression
 from dth_and_hysteresis import threshold_hysteresis
-from scipy.signal import correlate2d
 
 def scale(x):
     '''scale between 0 and 255'''
