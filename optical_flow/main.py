@@ -35,8 +35,8 @@ def computeHS(img1, img2, alpha):
 
     
 if __name__ == "__main__":
-    img1path = r"C:\Users\prasu\Desktop\testthis1.png"
-    img2path = r"C:\Users\prasu\Desktop\testthis2.png"
+    img1path = r"C:\Users\prasu\Desktop\tt1.png"
+    img2path = r"C:\Users\prasu\Desktop\tt2.png"
     img1 =cv2.imread(img1path, cv2.IMREAD_GRAYSCALE).astype(float)
 
     img2 =cv2.imread(img2path, cv2.IMREAD_GRAYSCALE).astype(float)

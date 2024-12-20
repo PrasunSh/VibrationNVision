@@ -1,7 +1,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
-def get_magnitude(u, v):
+def get_avgmagnitude(u, v):
     scale = 2
     sum = 0.0
     counter = 0.0
@@ -24,7 +24,7 @@ def draw_quiver(u,v,beforeImg):
     # 
     fig, ax = plt.subplots(figsize=(beforeImg.shape[1] / 100, beforeImg.shape[0] / 100))
     ax.imshow(beforeImg, cmap = 'gray')
-    magnitudeAvg = get_magnitude(u, v)
+    magnitudeAvg = get_avgmagnitude(u, v)
 
     for i in range(0, u.shape[0], 8):
         for j in range(0, u.shape[1],8):
@@ -33,7 +33,7 @@ def draw_quiver(u,v,beforeImg):
             magnitude = (dx**2 + dy**2)**0.5
             
             if magnitude > magnitudeAvg:
-                ax.quiver(j,i, -dx, dy, color = 'red',angles='xy', scale_units='xy', scale=1,  width=0.002)
+                ax.quiver(j,i, dx, dy, color = 'red',angles='xy', scale_units='xy', scale=1,  width=0.002)
 
     plt.show()
 
