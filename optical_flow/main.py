@@ -5,10 +5,11 @@ from scipy.ndimage import convolve
 from quiver import draw_quiver
 
 
-def computeHS(img1, img2, alpha):
+def HS(img1, img2, alpha):
     gimg1  = cv2.GaussianBlur(img1, (5, 5), 0)
     gimg2  = cv2.GaussianBlur(img2, (5, 5), 0)
 
+    #Initialize as zero.
     u = np.zeros((img1.shape[0], img1.shape[1]))
     v = np.zeros((img1.shape[0], img1.shape[1]))
     Ix, Iy, It = calcIxIyIt(gimg1, gimg2)
@@ -17,7 +18,9 @@ def computeHS(img1, img2, alpha):
                             [1 / 12, 1 / 6, 1 / 12]], float)
     
     iter_count = 0
+    #The more the total iterations, the better the output
 
+    #Implementing Iterative HS
     while True:
         iter_count += 1
         u_avg = convolve(u, avg_kernel)
@@ -31,6 +34,7 @@ def computeHS(img1, img2, alpha):
         if iter_count >50 :
             break
 
+    #Draw our quiver plot
     draw_quiver(u, v , img1)
 
     
@@ -41,4 +45,4 @@ if __name__ == "__main__":
 
     img2 =cv2.imread(img2path, cv2.IMREAD_GRAYSCALE).astype(float)
 
-    computeHS(img1, img2, 25)
+    HS(img1, img2, 25)
