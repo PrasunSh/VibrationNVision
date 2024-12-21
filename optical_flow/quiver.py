@@ -21,9 +21,18 @@ def get_avgmagnitude(u, v):
 
     return mag_avg
 
-def draw_quiver(u,v,beforeImg):
+def draw_quiver(u,v,beforeImg, afterImg):
     scale = 2
-    fig, ax = plt.subplots(figsize=(beforeImg.shape[1] / 100, beforeImg.shape[0] / 100))
+
+
+    fig, axs = plt.subplots(2,2,figsize=(beforeImg.shape[1] / 100, beforeImg.shape[0] / 100))
+    axs[0, 0].imshow(beforeImg, cmap='gray')
+    axs[0, 0].set_title("Input Image 1")
+    axs[0, 0].axis('off')
+    axs[0, 1].imshow(afterImg, cmap='gray')
+    axs[0, 1].set_title("Input Image 2")
+    axs[0, 1].axis('off')
+    ax = axs[1, 0]
     ax.imshow(beforeImg, cmap = 'gray')
     magnitudeAvg = get_avgmagnitude(u, v)
 
@@ -36,6 +45,8 @@ def draw_quiver(u,v,beforeImg):
             #plot only the significant arrows
             if magnitude > magnitudeAvg:
                 ax.quiver(j,i, dx, dy, color = 'red',angles='xy', scale_units='xy', scale=1,  width=0.002)
-
+    ax.axis('off')
+    axs[1, 1].axis('off')
+    plt.tight_layout()
     plt.show()
 

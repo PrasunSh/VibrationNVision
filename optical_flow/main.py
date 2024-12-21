@@ -35,7 +35,7 @@ def HS(img1, img2, alpha):
             break
 
     #Draw our quiver plot
-    draw_quiver(u, v , img1)
+    draw_quiver(u, v , img1, img2)
 
     
 if __name__ == "__main__":
