@@ -5,4 +5,4 @@
 ![tt2](https://github.com/user-attachments/assets/fb5b2941-4e38-43b2-8431-a1916abeb5b4)
 
 ## Output - HS
-![ttoutput](https://github.com/user-attachments/assets/89a9b5c3-3178-4d29-935a-e2b83d2bc3ab)
+![toutput](https://github.com/user-attachments/assets/2caa9d4d-c365-4890-85d8-603cb72bce70)
