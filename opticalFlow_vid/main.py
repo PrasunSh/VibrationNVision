@@ -5,7 +5,6 @@ from scipy.ndimage import convolve
 from scipy.fft import fft
 import matplotlib.pyplot as plt
 from scipy.signal import find_peaks
-from quiver import draw_quiver
 
 def HS(img1, img2, alpha):
     gimg1 = cv2.GaussianBlur(img1, (5, 5), 0)
@@ -56,7 +55,7 @@ def process_video(video_path, alpha):
     return np.array(u_all), np.array(v_all)
 
 def compute_temporal_fft(u_all, v_all):
-    # Apply FFT along the time axis
+    # Apply FFT
     u_fft = fft(u_all, axis=0)
     v_fft = fft(v_all, axis=0)
 
@@ -82,14 +81,12 @@ def plot_results(psd, frequencies, u_fft, v_fft):
     # Find peaks in the PSD
     peak_indices, _ = find_peaks(psd)
     
-    # Sort peaks by their PSD values in descending order and get the top 2
+    # Sort peaks by their PSD values in descending order and get top 2
     significant_indices = peak_indices[np.argsort(psd[peak_indices])[-2:][::-1]]
     significant_freqs = frequencies[significant_indices]
 
-    # Create a single figure for all plots
     fig, axes = plt.subplots(2, 3, figsize=(15, 10))
 
-    # Plot PSD vs Frequency
     axes[0, 0].plot(frequencies, psd)
     axes[0, 0].set_title("Power Spectral Density vs Frequency")
     axes[0, 0].set_xlabel("Frequency")
@@ -101,19 +98,16 @@ def plot_results(psd, frequencies, u_fft, v_fft):
         u_mode = np.abs(u_fft[freq_idx])
         v_mode = np.abs(v_fft[freq_idx])
 
-        # Plot X mode (u)
-        ax = axes[0, i + 1]  # Place on the top row
+        ax = axes[0, i + 1]  
         im = ax.imshow(u_mode, cmap="jet")
         ax.set_title(f"X Mode (u) for Frequency {frequencies[freq_idx]:.2f}")
         fig.colorbar(im, ax=ax, orientation="vertical")
 
-        # Plot Y mode (v)
-        ax = axes[1, i]  # Place on the bottom row
+        ax = axes[1, i]  
         im = ax.imshow(v_mode, cmap="jet")
         ax.set_title(f"Y Mode (v) for Frequency {frequencies[freq_idx]:.2f}")
         fig.colorbar(im, ax=ax, orientation="vertical")
 
-    # Adjust layout
     plt.tight_layout()
     plt.show()
 
