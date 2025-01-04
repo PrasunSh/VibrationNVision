@@ -31,7 +31,7 @@ def HS(img1, img2, alpha):
         u = u_avg - Ix * (p / d)
         v = v_avg - Iy * (p / d)
 
-        if iter_count >50 :
+        if iter_count >150 :
             break
 
     #Draw our quiver plot
